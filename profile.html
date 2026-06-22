@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="profile.html">Profile</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+</div>
+
+<h1>User Profile</h1>
+
+<h2 id="welcome"></h2>
+
+<button onclick="followUser()">Follow</button>
+
+<p id="followers">Followers: 0</p>
+
+<button onclick="logout()">Logout</button>
+
+<br><br>
+
+<a href="index.html">
+    <button>Go to Feed</button>
+</a>
+
+<script>
+
+let username = localStorage.getItem("username");
+
+document.getElementById("welcome").innerText =
+    "Welcome " + (username || "User") + " 👋";
+
+let followers = Number(localStorage.getItem("followers")) || 0;
+
+document.getElementById("followers").innerText =
+    "Followers: " + followers;
+
+function followUser() {
+    followers++;
+
+    localStorage.setItem("followers", followers);
+
+    document.getElementById("followers").innerText =
+        "Followers: " + followers;
+}
+
+function logout() {
+    alert("Logged Out");
+    window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+</html>

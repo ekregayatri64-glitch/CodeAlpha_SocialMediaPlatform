@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="profile.html">Profile</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+</div>
+
+<h1>Register</h1>
+
+<input type="text" id="username" placeholder="Enter Username">
+<br><br>
+
+<input type="password" id="password" placeholder="Enter Password">
+<br><br>
+
+<button onclick="register()">Register</button>
+
+<script>
+async function register() {
+
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    if(username === "" || password === "") {
+        alert("Fill all fields");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:5000/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        });
+
+        const message = await response.text();
+
+        alert(message);
+
+        window.location.href = "login.html";
+
+    } catch(error) {
+        alert("Server not running!");
+    }
+}
+</script>
+
+</body>
+</html>
